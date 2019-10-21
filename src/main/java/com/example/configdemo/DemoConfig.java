@@ -10,14 +10,15 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 @Configuration
+@PropertySource(value = "classpath:application.properties")
 @PropertySource(value = "file:///C:/etc/demo/demo.properties", ignoreResourceNotFound = true)
 @EnableRedisHttpSession
 public class DemoConfig
 {
 	@Bean
 	public RedisConnectionFactory redisConnectionFactory(
-		@Value("${redis.host}") String hostName,
-		@Value("${redis.port}") int port)
+		@Value("${spring.redis.host}") String hostName,
+		@Value("${spring.redis.port}") int port)
 	{
 		RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration(hostName, port);
 		return new LettuceConnectionFactory(configuration);
