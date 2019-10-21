@@ -14,8 +14,8 @@ public class DemoConfig
 {
 	@Bean
 	public RedisConnectionFactory redisConnectionFactory(
-		@Value("${spring.redis.host}") String hostName,
-		@Value("${spring.redis.port}") int port)
+		@Value("${spring.redis.host:localhost}") String hostName,
+		@Value("${spring.redis.port:6379}") int port)
 	{
 		RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration(hostName, port);
 		return new LettuceConnectionFactory(configuration);
